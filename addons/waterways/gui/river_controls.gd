@@ -16,7 +16,6 @@ enum CONSTRAINTS {
 	PLANE_XZ,
 	PLANE_XY,
 }
-var _right_mouse_pressed:bool = false
 
 var menu
 var constraints
@@ -25,19 +24,15 @@ func _enter_tree() -> void:
 	menu = $RiverMenu
 	constraints = $Constraints
 
+
 func spatial_gui_input(event: InputEvent) -> bool:
 	# This uses the forwarded spatial input in order to not react to events
 	# while the spatial editor is not in focus
-	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_RIGHT:
-			_right_mouse_pressed = event.pressed
-			
 	if event is InputEventKey and event.is_pressed() and not constraints.disabled:
 		
 		# Early exit if any of the modifiers (except shift) is pressed to not
 		# override default shortcuts like Ctrl + Z
-		# another case is when moving around the scene with the right click pressed
-		if event.alt or event.control or event.meta or event.command or _right_mouse_pressed:
+		if event.alt or event.control or event.meta or event.command:
 			return false
 		
 		# Handle local mode keybinding for toggling

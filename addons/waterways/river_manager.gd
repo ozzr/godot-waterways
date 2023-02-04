@@ -102,9 +102,8 @@ var baking_foam_offset := 0.1
 var baking_foam_blur := 0.02
 
 # Public variables
-var curve:Curve3D
-
-var widths :Array = [] setget set_widths
+var curve : Curve3D
+var widths := [] setget set_widths
 var valid_flowmap := false
 var debug_view := 0 setget set_debug_view
 var mesh_instance : MeshInstance
@@ -503,16 +502,7 @@ func spawn_mesh() -> void:
 	sibling_mesh.set_owner(get_tree().get_edited_scene_root())
 	sibling_mesh.translation = translation
 	sibling_mesh.material_override = null;
-	
-func spawn_path() -> void:
-	if owner == null:
-		push_warning("Cannot create Path sibling when River is root.")
-		return
-	var sibling_path :Path = Path.new()
-	get_parent().add_child(sibling_path)
-	sibling_path.set_owner(get_tree().get_edited_scene_root())
-	sibling_path.translation = translation
-	sibling_path.curve = curve.duplicate(true)
+
 
 func get_curve_points() -> PoolVector3Array:
 	var points : PoolVector3Array

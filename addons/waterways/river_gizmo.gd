@@ -246,15 +246,13 @@ func _draw_path(gizmo: EditorSpatialGizmo, curve : Curve3D) -> void:
 
 func _draw_handles(gizmo: EditorSpatialGizmo, river : RiverManager) -> void:
 	var handles = PoolVector3Array()
-	var handles_width = PoolVector3Array()
-	var handles_inout = PoolVector3Array()
 	var lines = PoolVector3Array()
 	for i in river.curve.get_point_count():
 		var point_pos = river.curve.get_point_position(i)
 		var point_pos_in = river.curve.get_point_in(i) + point_pos
 		var point_pos_out = river.curve.get_point_out(i) + point_pos
-		var point_width_pos_right = river.curve.get_point_position(i) + river.curve.get_point_out(i).cross(Vector3.UP).normalized() * river.widths[i% river.widths.size()]
-		var point_width_pos_left = river.curve.get_point_position(i) + river.curve.get_point_out(i).cross(Vector3.DOWN).normalized() * river.widths[i% river.widths.size()]
+		var point_width_pos_right = river.curve.get_point_position(i) + river.curve.get_point_out(i).cross(Vector3.UP).normalized() * river.widths[i]
+		var point_width_pos_left = river.curve.get_point_position(i) + river.curve.get_point_out(i).cross(Vector3.DOWN).normalized() * river.widths[i]
 		
 		handles.push_back(point_pos)
 		handles.push_back(point_pos_in)
